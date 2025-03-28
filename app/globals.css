@@ -2,12 +2,7 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-*,
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 body {
   font-family: "Be Vietnam Pro", sans-serif;
@@ -51,9 +46,9 @@ body {
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-myPrimary: #FF7A00;
-  --color-mySecond: #FF9736;
-  --color-myThird: #FFBC7D;
+  --color-myPrimary: #333399;
+  --color-mySecond: #006699;
+  --color-myThird: #0099FF;
 }
 
 :root {

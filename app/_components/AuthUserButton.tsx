@@ -5,7 +5,7 @@ const AuthUserButton = () => {
   return (
     <div>
       <Link href={"/sign-in"}>
-        <Button className="bg-indigo-600 hover:bg-indigo-600/80">
+        <Button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500">
           Sign In
         </Button>
       </Link>
