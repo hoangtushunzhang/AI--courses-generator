@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const myFontRegular = localFont(
-{
-  src: '/fonts/BeVietnamPro-Regular.ttf',
-  weight: '400',
+const myFontRegular = localFont({
+  src: "/fonts/BeVietnamPro-Regular.ttf",
+  weight: "400",
   variable: "--font-myFont-regular",
-}
-) 
+});
 
 export const metadata: Metadata = {
   title: "AI Generated Courses",
@@ -22,12 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${myFontRegular} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${myFontRegular} antialiased`}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
