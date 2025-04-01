@@ -1,5 +1,6 @@
 "use client";
 import { formSchema } from "@/types";
+import uuid4 from "uuid4";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -29,8 +30,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import HeaderContent from "../_components/HeaderContent";
+import { useTransition } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { createCourseContent } from "../actions/createCourse";
 
 const CreateCoursePage = () => {
+  const [isPending, startTransition] = useTransition();
+  const { user } = useUser();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +55,28 @@ const CreateCoursePage = () => {
   });
 
   function onSubmit(UserInput: z.infer<typeof formSchema>) {
-    console.log(UserInput);
+    startTransition(async () => {
+      if (!user) return;
+
+      const courseId = uuid4();
+
+      const createdBy = user?.primaryEmailAddress?.emailAddress || "no email";
+      const userName = user?.fullName || "no name";
+      const userProfileImage = user?.imageUrl || "/.placeholder.png";
+
+      try {
+        await createCourseContent({
+          courseId,
+          createdBy,
+          userName,
+          userProfileImage,
+          ...UserInput,
+        });
+        router.push(`/create-course/${courseId}`);
+      } catch (error) {
+        console.error("Failed to create course", error);
+      }
+    });
   }
   return (
     <div className="flex flex-col items-center justify-center">
@@ -273,7 +303,7 @@ const CreateCoursePage = () => {
               className="bg-myPrimary hover:bg-myPrimary/80"
               type="submit"
             >
-              Submit
+              {isPending ? "Creating..." : "Create Course Layout"}
             </Button>
           </form>
         </Form>

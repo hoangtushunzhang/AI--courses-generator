@@ -108,3 +108,4 @@ export const SidebarCoursesItems = [
 ];
 
 export const MAX_COURSE_FREE = 5;
+
