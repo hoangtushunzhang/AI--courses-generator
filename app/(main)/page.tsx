@@ -1,7 +1,11 @@
+import Features from "../_components/Features";
 import Hero from "../_components/Hero";
 
 export default function Home() {
-  return <div className="text-myPrimary text-3xl">
-    <Hero/>
-  </div>;
+  return (
+    <div className="">
+      <Hero />
+      <Features />
+    </div>
+  );
 }

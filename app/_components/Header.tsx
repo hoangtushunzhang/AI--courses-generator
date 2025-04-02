@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import NavBarMenu from "./NavBarMenu";
 import AuthUserButton from "./AuthUserButton";
+import MobileNavbar from "./MobileNavbar";
 
 const Header = () => {
   return (
@@ -17,13 +18,15 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div></div>
+      <div className=" md:hidden">
+        <MobileNavbar />
+      </div>
       <div className="flex items-center">
         <div className="mr-5">
-          <NavBarMenu/>
+          <NavBarMenu />
         </div>
         <div>
-          <AuthUserButton/>
+          <AuthUserButton />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 "use client";
-import { formSchema } from "@/types";
+import { Course, formSchema } from "@/types";
 import uuid4 from "uuid4";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,20 +25,42 @@ import {
   DurationItems,
   LanguageItems,
   LevelItems,
+  MAX_COURSE_FREE,
   VideoItems,
 } from "@/constants";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import HeaderContent from "../_components/HeaderContent";
-import { useTransition } from "react";
+import { useContext, useEffect, useState, useTransition } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { createCourseContent } from "../actions/createCourse";
+import { UserCourseListContext } from "@/app/_context/UserCourseListContext";
+import { getAllCoursesByUser } from "../actions/getCourse";
 
 const CreateCoursePage = () => {
   const [isPending, startTransition] = useTransition();
   const { user } = useUser();
   const router = useRouter();
+  const { userCourseList, setUserCourseList } = useContext(
+    UserCourseListContext
+  );
+  const [loading, setLoading] = useState(false);
+
+  const email = user?.primaryEmailAddress?.emailAddress;
+
+  useEffect(() => {
+    if (!email) return;
+    const getCourse = async () => {
+      setLoading(true);
+      const result = await getAllCoursesByUser(email);
+      if (result) {
+        setUserCourseList(result as Course[]);
+      }
+      setLoading(false);
+    };
+    getCourse();
+  }, [email, setUserCourseList]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -302,6 +324,9 @@ const CreateCoursePage = () => {
             <Button
               className="bg-myPrimary hover:bg-myPrimary/80"
               type="submit"
+              disabled={
+                loading || isPending || userCourseList?.length > MAX_COURSE_FREE
+              }
             >
               {isPending ? "Creating..." : "Create Course Layout"}
             </Button>

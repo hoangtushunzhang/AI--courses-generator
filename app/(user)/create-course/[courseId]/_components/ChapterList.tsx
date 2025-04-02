@@ -4,7 +4,7 @@ import EditChapters from './EditChapters';
 
 interface ChapterListProps {
 	course: Course;
-	edit: boolean;
+	edit?: boolean;
 }
 
 const ChapterList = ({ course, edit }: ChapterListProps) => {
