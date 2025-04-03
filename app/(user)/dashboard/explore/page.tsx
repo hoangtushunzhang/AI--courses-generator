@@ -19,6 +19,7 @@ const ExplorePage = () => {
     const getCourse = async () => {
       setLoading(true);
       const result = await getAllPublishedCoursesByOtherUser(email);
+	  console.log("Fetched Courses:", result);
       if (result) {
         setUserCourses(result as Course[]);
       }

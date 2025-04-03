@@ -3,7 +3,7 @@
 import { getPublishCourseByCourseId } from "@/app/(user)/actions/getCourse";
 import { Chapter, Course, CourseOutputChapter } from "@/types";
 import { useUser } from "@clerk/nextjs";
-import React, { use, useEffect, useState } from "react";
+import React, { use, useCallback, useEffect, useState } from "react";
 
 import ChapterListCard from "./_components/ChapterListCard";
 import { getChapterById } from "@/app/(user)/actions/getChapters";
@@ -43,24 +43,34 @@ const CourseStartPage = (props: { params: Params }) => {
     getCourse();
   }, [courseId, user]);
 
-  const getSelectedChapterContent = async (chapterId: number) => {
-    setLoading(true);
-    if (!courseId || !user) {
-      setLoading(false);
-      return;
+  const getSelectedChapterContent = useCallback(
+    async (chapterId: number) => {
+      setLoading(true);
+      if (!courseId || !user) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const result = await getChapterById(courseId, chapterId);
+        setChapter(result as Chapter);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [courseId, user]
+  );
+
+  useEffect(() => {
+    if (courseChapters?.length > 0) {
+      setSelectedChapter(courseChapters[0]);
+      getSelectedChapterContent(0);
     }
-    try {
-      const result = await getChapterById(courseId, chapterId);
-      setChapter(result as Chapter);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [courseChapters, getSelectedChapterContent]);
 
   return (
-    <div>
+    <div className="">
       {/* Chapter list sidebar */}
-      <div className="fixed md:w-64 hidden md:block h-screen overflow-scroll border-r-2 shadow-sm bg-white">
+      <div className="fixed md:w-64 hidden md:block h-screen over border-r-2 shadow-sm bg-white">
         <h2 className="font-medium text-lg bg-blue-600 p-3 text-white mb-5">
           {course?.courseOutputByAI?.courseName}
         </h2>
