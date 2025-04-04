@@ -39,16 +39,16 @@ const CoursesPage = (props: { searchParams: SearchParams }) => {
   }, [currentCategory]);
 
   return (
-    <div className="">
-      <div className="w-20 md:w-64">
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="hidden md:block md:w-64 fixed inset-y-0 bg-gray-100 p-4">
         <Sidebar />
       </div>
-      <div className="ml-60 md:ml-64 p-3 md:p-10 flex flex-col">
-        <div className="flex flex-col">
-          <h2 className="text-3xl font-bold">Explore More Courses</h2>
+      <div className="flex-1 md:ml-64 p-4 md:p-10">
+        <div className="text-center md:text-left">
+          <h2 className="text-2xl md:text-3xl font-bold">Explore More Courses</h2>
           <p>Explore more courses build with AI by all users</p>
         </div>
-        <div className="mt-5 min-h-screen grid">
+        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {loading || displayCourses?.length === undefined ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               <Loading />
@@ -61,7 +61,7 @@ const CoursesPage = (props: { searchParams: SearchParams }) => {
               />
             </div>
           ) : (
-            <h2 className="font-bold text-lg text-myPrimary">
+            <h2 className="col-span-full text-center text-lg font-bold text-myPrimary">
               No courses found
             </h2>
           )}
