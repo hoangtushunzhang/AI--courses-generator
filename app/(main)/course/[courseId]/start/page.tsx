@@ -70,7 +70,7 @@ const CourseStartPage = (props: { params: Params }) => {
   return (
     <div className="">
       {/* Chapter list sidebar */}
-      <div className="fixed md:w-64 hidden md:block h-screen over border-r-2 shadow-sm bg-white">
+      <div className="fixed md:w-64 hidden md:block h-[600px] overflow-scroll border-r-2 shadow-sm bg-white">
         <h2 className="font-medium text-lg bg-blue-600 p-3 text-white mb-5">
           {course?.courseOutputByAI?.courseName}
         </h2>

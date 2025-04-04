@@ -7,7 +7,7 @@ import MobileNavbar from "./MobileNavbar";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center shadow-sm py-5 px-10">
+    <div className="flex justify-between items-center bg-white/95 shadow-sm py-5 px-10">
       <div className="hidden md:block">
         <Link href={"/"}>
           <Image

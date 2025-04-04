@@ -31,9 +31,9 @@ export const CategoryItems = [
         href: '/finance',
     },
     {
-        label: "Accouting",
-        values: 'accouting',
-        href: '/accouting',
+        label: "Accounting",
+        values: 'accounting',
+        href: '/accounting',
     },
 ]
 
