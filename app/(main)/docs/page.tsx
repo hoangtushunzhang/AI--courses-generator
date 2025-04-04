@@ -51,7 +51,7 @@ const DocsPage = () => {
         </ul>
       </section>
 
-      <section className="mb-10 bg-blue-500 text-white p-5 rounded-lg shadow-sm">
+      <section className="mb-10 bg-gradient-to-r from-[#e2e2e2] to-[#c9d6ff] text-gray-800 p-5 rounded-lg shadow-sm">
         <h2 className="text-2xl font-semibold mb-3">Contact Us</h2>
         <p className="mb-2">
           If you have any questions or need assistance, please don&apos;t
