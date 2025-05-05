@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { ParticleCanvas } from "../hooks/ParticleCanvas";
 
 const Hero = () => {
   return (
     <section className="bg-gray-50">
+      <ParticleCanvas />
       <div className="bg-gray-50 mx-auto max-w-screen-xl px-10 py-20 lg:flex lg:items-center">
         <div className="mx-auto max-w-xl text-center">
           <h1 className="text-4xl font-extrabold sm:text-5xl text-myPrimary leading-[60px]">
@@ -23,7 +25,7 @@ const Hero = () => {
             <Link
               href={"/dashboard"}
               className="block w-full  px-12 py-3 text-sm font-medium bg-gradient-to-r
-               from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500
+               from-gray-900 to-purple-600 hover:from-gray-700 hover:to-purple-500
                text-white focus:outline-none focus:ring active:bg-myPrimary sm:w-auto rounded-sm
             "
             >
