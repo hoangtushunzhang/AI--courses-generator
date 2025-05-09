@@ -3,7 +3,7 @@ import { ParticleCanvas } from "../hooks/ParticleCanvas";
 
 const Hero = () => {
   return (
-    <section className="bg-gray-50">
+    <section className="bg-gray-50 relative overflow-hidden">
       <ParticleCanvas />
       <div className="bg-gray-50 mx-auto max-w-screen-xl px-10 py-20 lg:flex lg:items-center">
         <div className="mx-auto max-w-xl text-center">
